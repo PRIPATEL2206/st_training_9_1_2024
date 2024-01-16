@@ -13,12 +13,20 @@ class HashTable:
     def search(self,key,value):
         if key in self.values:
             return self.values[key].index(value)
+        
+def intersection(arr1:list,arr2:list):
+    ht=HashTable()
+    for i in arr1:
+        if  i not in ht.values:
+            ht.insert(i,i)
+    
+    res=set()
+    for i in arr2:
+        if i in ht.values:
+            res.add(i)
+    return list(res)
 
-ht=HashTable()
-ht.insert(1,1)
-ht.insert(2,2)
-ht.insert(3,3)
+arr1=map(int,input("enter value of arr1 : ").split())
+arr2=map(int,input("enter value of arr2 : ").split())
 
-ht.delete(2,2)
-ht.insert(2,3)            
-print(ht.search(2,3))
+print(intersection(arr1,arr2))

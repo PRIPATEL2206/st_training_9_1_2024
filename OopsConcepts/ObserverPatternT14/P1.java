@@ -1,31 +1,54 @@
+
 package OopsConcepts.ObserverPatternT14;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public class P1 {
-    
+interface ObserverInterface {
+    void notifyObserver(String data);
 }
 
-class CusomObserver {
-    private List<Observer> observers=new ArrayList<>();
-    private int data=0;
-    void addObserver(Observer ob){
-        observers.add(ob);
-    }
-    void removeObserver(Observer ob ){
-        observers.remove(observers.indexOf(ob));
+interface SubjectInterface {
+    List<ObserverInterface> obsevers = new ArrayList<>();
+
+    void addObserver(ObserverInterface ob);
+
+    void removeObserver(ObserverInterface ob);
+
+    void notifyObserver(String s);
+}
+
+
+class Observer implements ObserverInterface {
+
+    @Override
+    public void notifyObserver(String data) {
+        System.out.println("Observer got a data : " + data);
     }
 
-    void updateData(int d){
-        data=d;
+}
 
+class Subject implements SubjectInterface {
+
+    @Override
+    public void addObserver(ObserverInterface ob) {
+        obsevers.add(ob);
     }
-    private void notifyObervers(){
-        for (Observer observer : observers) {
-            observer.update(observer,data);
+
+    @Override
+    public void removeObserver(ObserverInterface ob) {
+        obsevers.remove(ob);
+    }
+
+    @Override
+    public void notifyObserver(String data) {
+        for (ObserverInterface observer : obsevers) {
+            observer.notifyObserver(data);
         }
     }
+}
+
+
+public class P1 {
+   
 }

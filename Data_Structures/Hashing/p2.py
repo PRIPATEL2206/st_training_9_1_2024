@@ -14,11 +14,13 @@ class HashTable:
         if key in self.values:
             return self.values[key].index(value)
 
-ht=HashTable()
-ht.insert(1,1)
-ht.insert(2,2)
-ht.insert(3,3)
+def firstNonRepeating(s:str):
+    ht=HashTable()
+    for i in s:
+        ht.insert(i,i)
+    for i in s:
+        if len(ht.values[i])==1:
+            return i
 
-ht.delete(2,2)
-ht.insert(2,3)            
-print(ht.search(2,3))
+s=input("enter the string : ")
+print(firstNonRepeating(s) ,"is first non repiting")
