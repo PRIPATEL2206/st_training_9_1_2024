@@ -8,6 +8,7 @@ def coinChange(coin,n,v,dp):
     if dp[n][v]!=-1:
         return dp[n][v]
     dp[n][v]=coinChange(coin,n,v-coin[n-1],dp)+coinChange(coin,n-1,v,dp)
+    # total types we can make change 
     return dp[n][v]
 
 coin=[1,2,3]
