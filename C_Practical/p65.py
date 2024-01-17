@@ -1,17 +1,38 @@
-def primes(graph:list,sour:int):
+
+def primes(graph:list[list],sour:int):
+    dis=0
+    n=1
     V=len(graph)
-    res=V*[V*[0]]
-    vert=[{"w":w,"n":[sour,i]}  for i,w in enumerate(graph[sour]) if w>0 ]
-    visited=[sour]
-    while len(vert)>0 and len(visited)<V:
-        vert.sort(key="w")
-        mi=vert[0]
-        if mi[]:
-        res[mi["n"][0]][mi["n"][1]]=min["w"]
-        vert+=[{"w":w,"n":[sour,i]}  for i,w in enumerate(graph[sour]) if w>0 ]
+    # u,v,w
+    arr=[ {
+        "u":0,
+        "v":0,
+        "w":0,
+    }]
+    visited=[False]*V
+    while len(arr)>0:
+        # get minimum
+        mi=min(arr,key=lambda e:e["w"])
+        arr.remove(mi)
+        
+        if visited[mi["v"]]:
+            continue
+        # IF IT IS NOT VISITED THAN ADD
+        dis+=mi["w"]
+        visited[mi["v"]]=True
+
+        # add all connected adges
+        for i,ele in enumerate(graph[mi["v"]]):
+            if ele>0 and not visited[i]:
+                obj={
+                    "u":mi["v"],
+                    "v":i,
+                    "w":ele
+                }
+                arr.append(obj)
+    return dis
 
 
-    return res
 
 graph = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
            [4, 0, 8, 0, 0, 0, 0, 11, 0],
@@ -23,5 +44,10 @@ graph = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
            [8, 11, 0, 0, 0, 0, 1, 0, 7],
            [0, 0, 2, 0, 0, 0, 6, 7, 0]
            ]
-
-primes(graph,0)
+g2=[[0, 2, 0, 6, 0],
+    [2, 0, 3, 8, 5],
+    [0, 3, 0, 0, 7],
+    [6, 8, 0, 0, 9],
+    [0, 5, 7, 9, 0]]
+print(primes(graph,0))
+   

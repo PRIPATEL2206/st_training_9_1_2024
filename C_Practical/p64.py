@@ -13,21 +13,24 @@ class Graph():
     def minDistance(self, dist, sptSet):
         min = 1e7
         for v in range(self.V):
+            # find minimum wich is not discover yet
             if dist[v] < min and sptSet[v] == False:
                 min = dist[v]
                 min_index = v
- 
         return min_index
 
     def dijkstra(self, src):
- 
+
         dist = [1e7] * self.V
         dist[src] = 0
         sptSet = [False] * self.V
- 
+
         for _ in range(self.V):
+
+            # find next minimum distance in garph
             u = self.minDistance(dist, sptSet)
             sptSet[u] = True
+            # update exixting distance with new distance
             for v in range(self.V):
                 if (self.graph[u][v] > 0 and
                    sptSet[v] == False and
